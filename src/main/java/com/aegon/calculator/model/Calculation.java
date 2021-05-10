@@ -21,4 +21,6 @@ public class Calculation {
     private int num2;
 
     private Operation operation;
+
+    private double result;
 }

@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class CalculationResult {
+public class CalculationResultDto {
     private final double result;
 }
