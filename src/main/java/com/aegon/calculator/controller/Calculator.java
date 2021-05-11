@@ -5,10 +5,8 @@ import com.aegon.calculator.dto.CalculationResultDto;
 import com.aegon.calculator.enums.Operation;
 import com.aegon.calculator.service.SimpleCalculator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/calculation")
@@ -18,6 +16,7 @@ public class Calculator {
     private final SimpleCalculator simpleCalculator;
 
     @GetMapping("/{a}/{b}/{operation}")
+    @ResponseStatus(HttpStatus.OK)
     public CalculationResultDto calculate(@PathVariable int a, @PathVariable int b, @PathVariable Operation operation) {
         return this.simpleCalculator.calculate(a, b, operation);
     }
