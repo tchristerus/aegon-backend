@@ -1,6 +1,6 @@
-package com.aegon.calculator.dto;
+package com.aegon.calculator.model.dto;
 
-import com.aegon.calculator.enums.Operation;
+import com.aegon.calculator.model.enums.Operation;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

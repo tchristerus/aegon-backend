@@ -1,4 +1,4 @@
-package com.aegon.calculator.dto;
+package com.aegon.calculator.model.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

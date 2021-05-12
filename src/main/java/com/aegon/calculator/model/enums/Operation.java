@@ -1,4 +1,4 @@
-package com.aegon.calculator.enums;
+package com.aegon.calculator.model.enums;
 
 public enum Operation {
     ADD,

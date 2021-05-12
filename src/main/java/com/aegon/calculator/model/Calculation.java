@@ -1,6 +1,6 @@
 package com.aegon.calculator.model;
 
-import com.aegon.calculator.enums.Operation;
+import com.aegon.calculator.model.enums.Operation;
 import lombok.Data;
 
 import javax.persistence.Entity;

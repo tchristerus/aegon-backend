@@ -1,11 +1,12 @@
 package com.aegon.calculator.service;
 
-import com.aegon.calculator.dto.CalculationDto;
-import com.aegon.calculator.dto.CalculationResultDto;
-import com.aegon.calculator.enums.Operation;
 import com.aegon.calculator.exception.response.DivideByZeroException;
 import com.aegon.calculator.mapper.CalculationDtoMapper;
 import com.aegon.calculator.model.Calculation;
+import com.aegon.calculator.model.dto.CalculationDto;
+import com.aegon.calculator.model.dto.CalculationResultDto;
+import com.aegon.calculator.model.dto.NewCalculationDto;
+import com.aegon.calculator.model.enums.Operation;
 import com.aegon.calculator.repository.CalculationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,29 +26,28 @@ public class SimpleCalculator {
     /**
      * Start a calculation with two given numbers and a operation e.g. subtract.
      *
-     * @param a         The first number
-     * @param b         The second number
-     * @param operation The type of calculation.
+     * @param newCalculationDto containing the numbers required for the calculation
+     * @param operation         The type of calculation.
      * @return The outcome of the calculation.
      */
-    public CalculationResultDto calculate(int a, int b, Operation operation) {
+    public CalculationResultDto calculate(NewCalculationDto newCalculationDto, Operation operation) {
         Double result = null;
 
         switch (operation) {
             case ADD:
-                result = add(a, b);
+                result = add(newCalculationDto.getNum1(), newCalculationDto.getNum2());
                 break;
             case DIVIDE:
-                result = divide(a, b);
+                result = divide(newCalculationDto.getNum1(), newCalculationDto.getNum2());
                 break;
             case MULTIPLY:
-                result = multiply(a, b);
+                result = multiply(newCalculationDto.getNum1(), newCalculationDto.getNum2());
                 break;
             case SUBTRACT:
-                result = subtract(a, b);
+                result = subtract(newCalculationDto.getNum1(), newCalculationDto.getNum2());
                 break;
         }
-        persist(a, b, operation, result);
+        persist(newCalculationDto, operation, result);
         return new CalculationResultDto(result);
     }
 
@@ -110,15 +110,14 @@ public class SimpleCalculator {
     /**
      * Saves the calculation to the database for history.
      *
-     * @param a         First number of the calculation
-     * @param b         Second number of the calculation
-     * @param operation The type of operation e.g. multiply.
-     * @param result    Result of the calculation.
+     * @param newCalculationDto containing the numbers required for the calculation
+     * @param operation         The type of operation e.g. multiply.
+     * @param result            Result of the calculation.
      */
-    private void persist(int a, int b, Operation operation, double result) {
+    private void persist(NewCalculationDto newCalculationDto, Operation operation, double result) {
         Calculation calculation = new Calculation();
-        calculation.setNum1(a);
-        calculation.setNum2(b);
+        calculation.setNum1(newCalculationDto.getNum1());
+        calculation.setNum2(newCalculationDto.getNum2());
         calculation.setOperation(operation);
         calculation.setResult(result);
         this.calculationRepository.save(calculation);
